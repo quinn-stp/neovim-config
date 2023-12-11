@@ -1,12 +1,15 @@
 return {
 	{
 		'VonHeikemen/lsp-zero.nvim',
+		dependencies = { 'nvim-telescope/telescope.nvim', 'neovim/nvim-lspconfig' },
 		branch = 'v3.x',
 		config = function()
 			local lsp = require('lsp-zero')
 			lsp.extend_lspconfig()
 			lsp.on_attach(function(client, bufnr)
 				lsp.default_keymaps({ buffer = bufnr })
+				local telescope = require('telescope.builtin')
+				vim.keymap.set('n', '<leader>fr', telescope.lsp_references, {})
 			end)
 			lsp.set_sign_icons({
 				error = '✘',
@@ -33,7 +36,7 @@ return {
 			}
 		end
 	},
-	{'neovim/nvim-lspconfig'},
+	{'neovim/nvim-lspconfig', dependencies = { 'folke/neodev.nvim' }},
 	{'hrsh7th/cmp-nvim-lsp'},
 	{'hrsh7th/cmp-nvim-lsp-signature-help'},
 	{
