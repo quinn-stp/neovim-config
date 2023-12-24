@@ -1,8 +1,6 @@
 return {
 	'navarasu/onedark.nvim',
-	opts = {
-		style = 'darker'
-	},
+	opts = { },
 	init = function()
 		require('onedark').load()
 	end,
