@@ -45,6 +45,10 @@ return {
 		opts = function()
 			local cmp = require('cmp')
 			return {
+				completion = { completeopt = 'menu,menuone,noinsert' },
+				mapping = {
+					['<tab>'] = cmp.mapping.confirm()
+				},
 				snippet = {
 					expand = function(args)
 						require('luasnip').lsp_expand(args.body)
@@ -56,10 +60,6 @@ return {
 					{ name = 'nvim_lsp_signature_help' },
 				},
 				formatting = require('lsp-zero').cmp_format(),
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
-				}
 			}
 		end
 	},
