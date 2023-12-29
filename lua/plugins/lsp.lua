@@ -26,13 +26,7 @@ return {
 		opts = function()
 			return {
 				ensure_installed = { 'clangd', 'lua_ls' },
-				handlers = {
-					lua_ls = function()
-						local lua_opts = require('lsp-zero').nvim_lua_ls()
-						require('lspconfig').lua_ls.setup(lua_opts)
-					end,
-					require('lsp-zero').default_setup
-				}
+				handlers = { require('lsp-zero').default_setup }
 			}
 		end
 	},
