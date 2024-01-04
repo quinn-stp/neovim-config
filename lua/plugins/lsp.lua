@@ -8,8 +8,30 @@ return {
 			lsp.extend_lspconfig()
 			lsp.on_attach(function(client, bufnr)
 				lsp.default_keymaps({ buffer = bufnr })
+
 				local telescope = require('telescope.builtin')
-				vim.keymap.set('n', '<leader>fr', telescope.lsp_references, {})
+				vim.keymap.set('n', '<leader>fr', telescope.lsp_references, { buffer = bufnr })
+
+				vim.diagnostic.config {
+					signs = false,
+					underline = true,
+					virtual_text = {
+						spacing = 1
+					},
+					virtual_lines = false,
+					update_in_insert = true,
+					float = {
+						header = false,
+						border = 'none',
+						focusable = true,
+					}
+				}
+
+				vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+					vim.lsp.handlers.hover, {
+						border = 'none'
+					}
+				)
 			end)
 			lsp.set_sign_icons({
 				error = '✘',
@@ -38,6 +60,34 @@ return {
 		dependencies = { 'VonHeikemen/lsp-zero.nvim', 'L3MON4D3/LuaSnip' },
 		opts = function()
 			local cmp = require('cmp')
+			local kind_icons = {
+				Text = "",
+				Method = "󰆧",
+				Function = "󰊕",
+				Constructor = "",
+				Field = "󰇽",
+				Variable = "󰂡",
+				Class = "󰠱",
+				Interface = "",
+				Module = "",
+				Property = "󰜢",
+				Unit = "",
+				Value = "󰎠",
+				Enum = "",
+				Keyword = "󰌋",
+				Snippet = "",
+				Color = "󰏘",
+				File = "󰈙",
+				Reference = "",
+				Folder = "󰉋",
+				EnumMember = "",
+				Constant = "󰏿",
+				Struct = "",
+				Event = "",
+				Operator = "󰆕",
+				TypeParameter = "󰅲",
+			}
+
 			return {
 				completion = { completeopt = 'menu,menuone,noinsert' },
 				mapping = {
@@ -53,7 +103,26 @@ return {
 					{ name = 'nvim_lsp' },
 					{ name = 'nvim_lsp_signature_help' },
 				},
-				formatting = require('lsp-zero').cmp_format(),
+				window = {
+					completion = {
+						col_offset = -3,
+						side_padding = 0
+					}
+				},
+				formatting = {
+					fields = { 'kind', 'abbr', 'menu' },
+					format = function(entry, vim_item)
+						vim_item.kind = " " .. kind_icons[vim_item.kind] .. " "
+						vim_item.menu = ({
+							buffer = "[Buffer]",
+							nvim_lsp = "[LSP]",
+							luasnip = "[LuaSnip]",
+							nvim_lua = "[Lua]",
+							latex_symbols = "[LaTeX]",
+						})[entry.source.name]
+						return vim_item
+					end
+				},
 			}
 		end
 	},
