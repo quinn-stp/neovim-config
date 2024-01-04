@@ -21,6 +21,10 @@ return {
 			{ 'TelescopePromptTitle', { fg = palette.black.base, bg = palette.blue.bright } },
 			{ 'TelescopeResultsTitle', { fg = palette.black.base, bg = palette.cyan.bright } },
 			{ 'TelescopePreviewTitle', { fg = palette.black.base, bg = palette.cyan.bright } },
+
+			-- Diffview
+			{ 'DiffviewFilePanelTitle', { fg = palette.magenta.base } },
+			{ 'DiffviewFilePanelCounter', { fg = palette.blue.base } },
 			
 			-- CMP
 			-- { 'CmpItemKindField', { fg = "#EED8DA", bg = "#B5585F" }},
