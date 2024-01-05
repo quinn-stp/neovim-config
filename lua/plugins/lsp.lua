@@ -48,7 +48,14 @@ return {
 		opts = function()
 			return {
 				ensure_installed = { 'clangd', 'lua_ls' },
-				handlers = { require('lsp-zero').default_setup }
+				handlers = {
+					require('lsp-zero').default_setup,
+					clangd = function()
+						require('lspconfig')['clangd'].setup({
+							cmd = { vim.fn.stdpath('data') .. '/mason/bin/clangd', '--function-arg-placeholders=false' }
+						})
+					end
+				}
 			}
 		end
 	},
