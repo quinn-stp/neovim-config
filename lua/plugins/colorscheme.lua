@@ -9,6 +9,12 @@ return {
 			-- UI
 			{ 'NormalFloat', { bg = palette.black.base }},
 			{ 'MatchParen', { bg = palette.sel1 }},
+			{ 'CursorLine', { link = 'Visual' }},
+
+			-- Illuminate
+			{ 'illuminatedWordText', { underline = true }},
+			{ 'illuminatedWordWrite', { link = 'illuminatedWordText' }},
+			{ 'illuminatedWordRead', { link = 'illuminatedWordText' }},
 
 			-- Telescope
 			{ 'TelescopeMatching', { fg = palette.orange.bright, underline = true } },
