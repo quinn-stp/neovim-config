@@ -11,6 +11,8 @@ return {
 
 				local telescope = require('telescope.builtin')
 				vim.keymap.set('n', '<leader>fr', telescope.lsp_references, { buffer = bufnr })
+				vim.keymap.set('n', 'gd', telescope.lsp_definitions, { buffer = bufnr })
+				vim.keymap.set('n', 'gh', function() vim.cmd('ClangdSwitchSourceHeader') end, { buffer = bufnr })
 
 				vim.diagnostic.config {
 					signs = false,
