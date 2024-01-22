@@ -7,12 +7,21 @@ return {
 			local lsp = require('lsp-zero')
 			lsp.extend_lspconfig()
 			lsp.on_attach(function(client, bufnr)
-				lsp.default_keymaps({ buffer = bufnr })
-
 				local telescope = require('telescope.builtin')
-				vim.keymap.set('n', '<leader>fr', telescope.lsp_references, { buffer = bufnr })
+				vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
 				vim.keymap.set('n', 'gd', telescope.lsp_definitions, { buffer = bufnr })
+				vim.keymap.set('n', 'gi', telescope.lsp_implementations, { buffer = bufnr })
+				vim.keymap.set('n', 'go', telescope.lsp_type_definitions, { buffer = bufnr })
+				vim.keymap.set('n', 'gr', telescope.lsp_references, { buffer = bufnr })
+				vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { buffer = bufnr })
 				vim.keymap.set('n', 'gh', function() vim.cmd('ClangdSwitchSourceHeader') end, { buffer = bufnr })
+				vim.keymap.set('n', '<leader>rr', vim.lsp.buf.rename, { buffer = bufnr })
+				vim.keymap.set('x', '<leader>rf', function() vim.lsp.buf.format({async = true}) end, { buffer = bufnr })
+				vim.keymap.set('n', '<leader>ra', vim.lsp.buf.code_action, { buffer = bufnr })
+
+				vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { buffer = bufnr })
+				vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { buffer = bufnr })
+				vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { buffer = bufnr })
 
 				vim.diagnostic.config {
 					signs = false,
@@ -29,18 +38,18 @@ return {
 					}
 				}
 
-				vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+				vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+					vim.lsp.handlers.hover, {
+						border = 'none'
+					}
+				)
+
+				vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
 					vim.lsp.handlers.hover, {
 						border = 'none'
 					}
 				)
 			end)
-			lsp.set_sign_icons({
-				error = '✘',
-				warn = '▲',
-				hint = '⚑',
-				info = '»'
-			})
 		end
 	},
 	{ 'williamboman/mason.nvim', opts = {} },
