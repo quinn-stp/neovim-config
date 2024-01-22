@@ -12,10 +12,10 @@ return {
 					border = true,
 					mappings = {
 						i = {
-							['<C-l>'] = require('telescope.actions').send_selected_to_qflist,
+							['<S-CR>'] = require('telescope.actions').smart_send_to_qflist,
 						},
 						n = {
-							['<C-l>'] = require('telescope.actions').send_selected_to_qflist,
+							['<S-CR>'] = require('telescope.actions').smart_send_to_qflist,
 						},
 					}
 				}
