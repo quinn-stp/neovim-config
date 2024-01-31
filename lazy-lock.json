@@ -4,6 +4,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "5af77f54de1b16c34b23cba810150689a3a90312" },
   "cmp-nvim-lsp-signature-help": { "branch": "main", "commit": "3d8912ebeb56e5ae08ef0906e3a54de1c66b92f1" },
   "diffview.nvim": { "branch": "main", "commit": "3dc498c9777fe79156f3d32dddd483b8b3dbd95f" },
+  "dressing.nvim": { "branch": "master", "commit": "0e88293ce3459f4bb310125f3366304af6dc7990" },
   "fidget.nvim": { "branch": "main", "commit": "3a93300c076109d86c7ce35ec67a8034ae6ba9db" },
   "gitsigns.nvim": { "branch": "main", "commit": "3e6e91b09f0468c32d3b96dcacf4b947f037ce25" },
   "harpoon": { "branch": "harpoon2", "commit": "2cd4e03372f7ee5692c8caa220f479ea07970f17" },

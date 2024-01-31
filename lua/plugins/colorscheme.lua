@@ -7,7 +7,7 @@ return {
 
 		local hl_groups = {
 			-- UI
-			{ 'NormalFloat', { bg = palette.black.base }},
+			-- { 'NormalFloat', { bg = palette.black.base }},
 			{ 'MatchParen', { bg = palette.sel1 }},
 			{ 'CursorLine', { link = 'Visual' }},
 

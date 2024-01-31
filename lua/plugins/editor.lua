@@ -12,5 +12,13 @@ return {
 		opts = {
 			min_count_to_highlight = 2
 		}
-	}
+	},
+    {
+        'stevearc/dressing.nvim',
+        opts = {
+            input = {
+                border = 'none'
+            }
+        }
+    }
 }
