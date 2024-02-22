@@ -3,11 +3,11 @@ return {
 		'nvim-treesitter/nvim-treesitter',
 		build = ':TSUpdate',
 		opts = {
-			ensure_installed = { 'c', 'cpp', 'lua', 'vim', 'vimdoc', 'query' },
+			ensure_installed = { 'c', 'cpp', 'lua', 'vim', 'vimdoc', 'query', 'jsonc', 'cmake' },
 			highlight = { enable = true },
 			indent = {
 				enable = true,
-				disable = { 'cpp' }
+				disable = { 'cpp', 'cmake' }
 			}
 		},
 		config = function(plugin, opts)

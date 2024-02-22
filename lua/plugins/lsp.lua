@@ -8,15 +8,20 @@ return {
 			lsp.extend_lspconfig()
 			lsp.on_attach(function(client, bufnr)
 				local telescope = require('telescope.builtin')
+
 				vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
 				vim.keymap.set('n', 'gd', telescope.lsp_definitions, { buffer = bufnr })
 				vim.keymap.set('n', 'gi', telescope.lsp_implementations, { buffer = bufnr })
 				vim.keymap.set('n', 'go', telescope.lsp_type_definitions, { buffer = bufnr })
 				vim.keymap.set('n', 'gr', telescope.lsp_references, { buffer = bufnr })
 				vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { buffer = bufnr })
-				vim.keymap.set('n', 'gh', function() vim.cmd('ClangdSwitchSourceHeader') end, { buffer = bufnr })
+                if (client.name == 'clangd') then
+                    vim.keymap.set('n', 'gh', function() vim.cmd('ClangdSwitchSourceHeader') end, { buffer = bufnr })
+                end
+
 				vim.keymap.set('n', '<leader>rr', vim.lsp.buf.rename, { buffer = bufnr })
 				vim.keymap.set('x', '<leader>rf', function() vim.lsp.buf.format({async = true}) end, { buffer = bufnr })
+				vim.keymap.set('n', '<leader>rF', function() vim.lsp.buf.format({async = true}) end, { buffer = bufnr })
 				vim.keymap.set('n', '<leader>ra', vim.lsp.buf.code_action, { buffer = bufnr })
 
 				vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { buffer = bufnr })
@@ -58,12 +63,16 @@ return {
 		dependencies = { 'williamboman/mason.nvim', 'VonHeikemen/lsp-zero.nvim' },
 		opts = function()
 			return {
-				ensure_installed = { 'clangd', 'lua_ls' },
+				ensure_installed = { 'clangd', 'lua_ls', 'jsonls' },
 				handlers = {
 					require('lsp-zero').default_setup,
 					clangd = function()
 						require('lspconfig')['clangd'].setup({
-							cmd = { vim.fn.stdpath('data') .. '/mason/bin/clangd', '--function-arg-placeholders=false' }
+							cmd = {
+                                vim.fn.expand('$MASON/bin/clangd'),
+                                '--function-arg-placeholders=false',
+                                '--offset-encoding=utf-16',
+                            }
 						})
 					end
 				}
@@ -71,6 +80,30 @@ return {
 		end
 	},
 	{'neovim/nvim-lspconfig', dependencies = { 'folke/neodev.nvim' }},
+    {
+        'https://gitlab.com/schrieveslaach/sonarlint.nvim',
+        dependencies = { 'williamboman/mason.nvim', 'neovim/nvim-lspconfig', 'williamboman/mason-lspconfig.nvim' },
+        opts = function()
+            return {
+                server = {
+                    cmd = {
+                        'sonarlint-language-server',
+                        '-stdio',
+                        '-analyzers',
+                        vim.fn.expand('$MASON/share/sonarlint-analyzers/sonarcfamily.jar'),
+                    },
+                    settings = {
+                        sonarlint = {
+                            pathToCompileCommands = './build/compile_commands.json'
+                        }
+                    }
+                },
+                filetypes = {
+                    'cpp'
+                }
+            }
+        end
+    },
 	{'hrsh7th/cmp-nvim-lsp'},
 	{'hrsh7th/cmp-nvim-lsp-signature-help'},
 	{
