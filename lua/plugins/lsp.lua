@@ -63,7 +63,7 @@ return {
 		dependencies = { 'williamboman/mason.nvim', 'VonHeikemen/lsp-zero.nvim' },
 		opts = function()
 			return {
-				ensure_installed = { 'clangd', 'lua_ls', 'jsonls' },
+				ensure_installed = { 'clangd', 'lua_ls', 'jsonls', 'tsserver', 'svelte', 'rust_analyzer', 'cssls', 'jsonls' },
 				handlers = {
 					require('lsp-zero').default_setup,
 					clangd = function()
