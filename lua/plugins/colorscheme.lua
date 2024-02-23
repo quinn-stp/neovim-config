@@ -1,88 +1,52 @@
 return {
     'neanias/everforest-nvim',
     main = 'everforest',
+    lazy = false,
+    priority = 1000,
     config = {
         background = 'hard',
         float_style = 'dim',
+        on_highlights = function(hl, palette)
+            -- palette = {
+            --   aqua = "#83c092",
+            --   bg0 = "#272e33",
+            --   bg1 = "#2e383c",
+            --   bg2 = "#374145",
+            --   bg3 = "#414b50",
+            --   bg4 = "#495156",
+            --   bg5 = "#4f5b58",
+            --   bg_blue = "#384b55",
+            --   bg_dim = "#1e2326",
+            --   bg_green = "#3c4841",
+            --   bg_red = "#493b40",
+            --   bg_visual = "#4c3743",
+            --   bg_yellow = "#45443c",
+            --   blue = "#7fbbb3",
+            --   fg = "#d3c6aa",
+            --   green = "#a7c080",
+            --   grey0 = "#7a8478",
+            --   grey1 = "#859289",
+            --   grey2 = "#9da9a0",
+            --   none = "NONE",
+            --   orange = "#e69875",
+            --   purple = "#d699b6",
+            --   red = "#e67e80",
+            --   statusline1 = "#a7c080",
+            --   statusline2 = "#d3c6aa",
+            --   statusline3 = "#e67e80",
+            --   yellow = "#dbbc7f"
+            -- }
+            hl.CurrentWord = { underline = true }
+            hl.TelescopeBorder = { bg = palette.bg_dim, fg = palette.bg_dim }
+            hl.TelescopeNormal = { bg = palette.bg_dim, fg = palette.fg }
+            hl.TelescopePromptTitle = { bg = palette.green, fg = palette.bg_dim }
+            hl.TelescopeResultsTitle = { bg = palette.blue, fg = palette.bg_dim }
+            hl.TelescopePreviewTitle = { bg = palette.blue, fg = palette.bg_dim }
+            hl.DiffviewFilePanelTitle = { fg = palette.purple }
+            hl.DiffviewFilePanelCounter = { fg = palette.blue }
+        end
     },
     init = function()
         require('everforest').load();
     end
 }
-
--- return {
--- 	'EdenEast/nightfox.nvim',
--- 	init = function()
--- 		vim.cmd('colorscheme carbonfox')
---
--- 		local palette = require('nightfox.palette').load('carbonfox')
---
--- 		local hl_groups = {
--- 			-- UI
--- 			-- { 'NormalFloat', { bg = palette.black.base }},
--- 			{ 'MatchParen', { bg = palette.sel1 }},
--- 			{ 'CursorLine', { link = 'Visual' }},
---
--- 			-- Illuminate
--- 			{ 'illuminatedWordText', { underline = true }},
--- 			{ 'illuminatedWordWrite', { link = 'illuminatedWordText' }},
--- 			{ 'illuminatedWordRead', { link = 'illuminatedWordText' }},
---
--- 			-- Telescope
--- 			{ 'TelescopeMatching', { fg = palette.orange.bright, underline = true } },
--- 			{ 'TelescopeSelection', { bg = palette.black.base } },
--- 			{ 'TelescopeNormal', { fg = palette.white.base, bg = palette.black.dim } },
--- 			{ 'TelescopePromptNormal', { bg = palette.black.base } },
--- 			{ 'TelescopeResultsBorder', { fg = palette.black.dim, bg = palette.black.dim } },
--- 			{ 'TelescopePreviewBorder', { fg = palette.black.dim, bg = palette.black.dim } },
--- 			{ 'TelescopePromptBorder', { fg = palette.black.base, bg = palette.black.base } },
--- 			{ 'TelescopePromptTitle', { fg = palette.black.base, bg = palette.blue.bright } },
--- 			{ 'TelescopeResultsTitle', { fg = palette.black.base, bg = palette.cyan.bright } },
--- 			{ 'TelescopePreviewTitle', { fg = palette.black.base, bg = palette.cyan.bright } },
---
--- 			-- Diffview
--- 			{ 'DiffviewFilePanelTitle', { fg = palette.magenta.base } },
--- 			{ 'DiffviewFilePanelCounter', { fg = palette.blue.base } },
--- 			
--- 			-- CMP
--- 			-- { 'CmpItemKindField', { fg = "#EED8DA", bg = "#B5585F" }},
--- 			-- { 'CmpItemKindProperty', { fg = "#EED8DA", bg = "#B5585F" }},
--- 			-- { 'CmpItemKindEvent', { fg = "#EED8DA", bg = "#B5585F" }},
--- 			--
--- 			-- { 'CmpItemKindText', { fg = "#C3E88D", bg = "#9FBD73" }},
--- 			-- { 'CmpItemKindEnum', { fg = "#C3E88D", bg = "#9FBD73" }},
--- 			-- { 'CmpItemKindKeyword', { fg = "#C3E88D", bg = "#9FBD73" }},
--- 			--
--- 			-- { 'CmpItemKindConstant', { fg = "#FFE082", bg = "#D4BB6C" }},
--- 			-- { 'CmpItemKindConstructor', { fg = "#FFE082", bg = "#D4BB6C" }},
--- 			-- { 'CmpItemKindReference', { fg = "#FFE082", bg = "#D4BB6C" }},
--- 			--
--- 			-- { 'CmpItemKindFunction', { fg = "#EADFF0", bg = "#A377BF" }},
--- 			-- { 'CmpItemKindStruct', { fg = "#EADFF0", bg = "#A377BF" }},
--- 			-- { 'CmpItemKindClass', { fg = "#EADFF0", bg = "#A377BF" }},
--- 			-- { 'CmpItemKindModule', { fg = "#EADFF0", bg = "#A377BF" }},
--- 			-- { 'CmpItemKindOperator', { fg = "#EADFF0", bg = "#A377BF" }},
--- 			--
--- 			-- { 'CmpItemKindVariable', { fg = "#C5CDD9", bg = "#7E8294" }},
--- 			-- { 'CmpItemKindFile', { fg = "#C5CDD9", bg = "#7E8294" }},
--- 			--
--- 			-- { 'CmpItemKindUnit', { fg = "#F5EBD9", bg = "#D4A959" }},
--- 			-- { 'CmpItemKindSnippet', { fg = "#F5EBD9", bg = "#D4A959" }},
--- 			-- { 'CmpItemKindFolder', { fg = "#F5EBD9", bg = "#D4A959" }},
--- 			--
--- 			-- { 'CmpItemKindMethod', { fg = "#DDE5F5", bg = "#6C8ED4" }},
--- 			-- { 'CmpItemKindValue', { fg = "#DDE5F5", bg = "#6C8ED4" }},
--- 			-- { 'CmpItemKindEnumMember', { fg = "#DDE5F5", bg = "#6C8ED4" }},
--- 			--
--- 			-- { 'CmpItemKindInterface', { fg = "#D8EEEB", bg = "#58B5A8" }},
--- 			-- { 'CmpItemKindColor', { fg = "#D8EEEB", bg = "#58B5A8" }},
--- 			-- { 'CmpItemKindTypeParameter', { fg = "#D8EEEB", bg = "#58B5A8" }},
--- 		}
---
--- 		for _, hl in pairs(hl_groups) do
--- 			vim.api.nvim_set_hl(0, hl[1], hl[2])
--- 		end
--- 	end,
--- 	lazy = false,
--- 	priority = 1000
--- }
