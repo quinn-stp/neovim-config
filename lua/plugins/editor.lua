@@ -17,7 +17,27 @@ return {
         'stevearc/dressing.nvim',
         opts = {
             input = {
-                border = 'none'
+                insert_only = false,
+                start_in_insert = false,
+                border = 'solid',
+                mappings = {
+                    n = {
+                        ["<Esc>"] = "Close",
+                        ["<CR>"] = "Confirm",
+                        ["k"] = "HistoryPrev",
+                        ["j"] = "HistoryNext",
+                    },
+                    i = {
+                        ["<C-c>"] = "Close",
+                        ["<CR>"] = "Confirm",
+                        ["<Up>"] = "HistoryPrev",
+                        ["<Down>"] = "HistoryNext",
+                    },
+                },
+                override = function(config)
+                    config.title = ''
+                    return config
+                end
             }
         }
     },

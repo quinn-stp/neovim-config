@@ -3,6 +3,8 @@ return {
 	dependencies = { 'nvim-tree/nvim-web-devicons' },
 	opts = {
 		options = {
+            component_separators = '',
+            section_separators = '',
 			disabled_filetypes = {
 				statusline = {
 					'neo-tree',
@@ -13,6 +15,6 @@ return {
 	},
 	init = function()
 		vim.opt.showmode = false
-		-- vim.opt.laststatus = 3
+		vim.opt.laststatus = 3
 	end
 }

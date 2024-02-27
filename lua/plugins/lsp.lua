@@ -14,7 +14,6 @@ return {
 				vim.keymap.set('n', 'gi', telescope.lsp_implementations, { buffer = bufnr })
 				vim.keymap.set('n', 'go', telescope.lsp_type_definitions, { buffer = bufnr })
 				vim.keymap.set('n', 'gr', telescope.lsp_references, { buffer = bufnr })
-				vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { buffer = bufnr })
                 if (client.name == 'clangd') then
                     vim.keymap.set('n', 'gh', function() vim.cmd('ClangdSwitchSourceHeader') end, { buffer = bufnr })
                 end
@@ -28,32 +27,35 @@ return {
 				vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { buffer = bufnr })
 				vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { buffer = bufnr })
 
-				vim.diagnostic.config {
+                local signs = {
+                    [vim.diagnostic.severity.ERROR] = '󰅚 ',
+                    [vim.diagnostic.severity.WARN] = '󰀪 ',
+                    [vim.diagnostic.severity.INFO] = '󰋽 ',
+                    [vim.diagnostic.severity.HINT] = '󰌶 '
+                }
+
+				vim.diagnostic.config({
 					signs = false,
 					underline = true,
-					virtual_text = {
-						spacing = 1
-					},
-					virtual_lines = false,
 					update_in_insert = true,
+                    severity_sort = true,
+					virtual_text = {
+						spacing = 1,
+                        prefix = '',
+                        suffix = ' ',
+                        format = function(diagnostic)
+                            return signs[diagnostic.severity] .. ' ' .. diagnostic.message
+                        end
+					},
 					float = {
 						header = false,
-						border = 'none',
+						border = 'solid',
 						focusable = true,
 					}
-				}
+				})
 
-				vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-					vim.lsp.handlers.hover, {
-						border = 'none'
-					}
-				)
-
-				vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-					vim.lsp.handlers.hover, {
-						border = 'none'
-					}
-				)
+				vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'solid' })
+				vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'solid' })
 			end)
 		end
 	},
@@ -104,8 +106,8 @@ return {
             }
         end
     },
-	{'hrsh7th/cmp-nvim-lsp'},
-	{'hrsh7th/cmp-nvim-lsp-signature-help'},
+	{ 'hrsh7th/cmp-nvim-lsp' },
+	{ 'hrsh7th/cmp-nvim-lsp-signature-help' },
 	{
 		'hrsh7th/nvim-cmp',
 		dependencies = { 'VonHeikemen/lsp-zero.nvim', 'L3MON4D3/LuaSnip' },
@@ -142,7 +144,8 @@ return {
 			return {
 				completion = { completeopt = 'menu,menuone,noinsert' },
 				mapping = {
-					['<tab>'] = cmp.mapping.confirm()
+					['<tab>'] = cmp.mapping.confirm(),
+                    ['<cr>'] = cmp.mapping.confirm()
 				},
 				snippet = {
 					expand = function(args)
@@ -177,7 +180,7 @@ return {
 			}
 		end
 	},
-	{'L3MON4D3/LuaSnip'},
+	{ 'L3MON4D3/LuaSnip' },
 	{ 'folke/neodev.nvim', opts = {} },
 	{ 'j-hui/fidget.nvim', opts = {} }
 }

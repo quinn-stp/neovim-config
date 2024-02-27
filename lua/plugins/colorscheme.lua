@@ -37,13 +37,22 @@ return {
             --   yellow = "#dbbc7f"
             -- }
             hl.CurrentWord = { underline = true }
+
             hl.TelescopeBorder = { bg = palette.bg_dim, fg = palette.bg_dim }
             hl.TelescopeNormal = { bg = palette.bg_dim, fg = palette.fg }
             hl.TelescopePromptTitle = { bg = palette.green, fg = palette.bg_dim }
             hl.TelescopeResultsTitle = { bg = palette.blue, fg = palette.bg_dim }
             hl.TelescopePreviewTitle = { bg = palette.blue, fg = palette.bg_dim }
+
             hl.DiffviewFilePanelTitle = { fg = palette.purple }
             hl.DiffviewFilePanelCounter = { fg = palette.blue }
+            hl.DiffChange = { bg = palette.none }
+            hl.DiffText = { bg = palette.bg_blue }
+
+            hl.DiagnosticVirtualTextHint = { fg = palette.green, bg = palette.bg_green }
+            hl.DiagnosticVirtualTextInfo = { fg = palette.blue, bg = palette.bg_blue }
+            hl.DiagnosticVirtualTextWarn = { fg = palette.yellow, bg = palette.bg_yellow }
+            hl.DiagnosticVirtualTextError = { fg = palette.red, bg = palette.bg_red }
         end
     },
     init = function()
