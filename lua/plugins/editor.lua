@@ -49,12 +49,23 @@ return {
     {
         'lukas-reineke/indent-blankline.nvim',
         main = 'ibl',
-        opts = {}
+        opts = {
+            scope = {
+                show_start = false,
+                show_end = false
+            }
+        }
     },
     {
         "iamcco/markdown-preview.nvim",
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         ft = { "markdown" },
         build = function() vim.fn["mkdp#util#install"]() end,
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        main = 'treesitter-context',
+        dependencies = 'nvim-treesitter/nvim-treesitter',
+        opts = {}
     }
 }

@@ -7,35 +7,7 @@ return {
         background = 'hard',
         float_style = 'dim',
         on_highlights = function(hl, palette)
-            -- palette = {
-            --   aqua = "#83c092",
-            --   bg0 = "#272e33",
-            --   bg1 = "#2e383c",
-            --   bg2 = "#374145",
-            --   bg3 = "#414b50",
-            --   bg4 = "#495156",
-            --   bg5 = "#4f5b58",
-            --   bg_blue = "#384b55",
-            --   bg_dim = "#1e2326",
-            --   bg_green = "#3c4841",
-            --   bg_red = "#493b40",
-            --   bg_visual = "#4c3743",
-            --   bg_yellow = "#45443c",
-            --   blue = "#7fbbb3",
-            --   fg = "#d3c6aa",
-            --   green = "#a7c080",
-            --   grey0 = "#7a8478",
-            --   grey1 = "#859289",
-            --   grey2 = "#9da9a0",
-            --   none = "NONE",
-            --   orange = "#e69875",
-            --   purple = "#d699b6",
-            --   red = "#e67e80",
-            --   statusline1 = "#a7c080",
-            --   statusline2 = "#d3c6aa",
-            --   statusline3 = "#e67e80",
-            --   yellow = "#dbbc7f"
-            -- }
+            -- palette = { aqua , bg0 , bg1 , bg2 , bg3 , bg4 , bg5 , bg_blue , bg_dim , bg_green , bg_red , bg_visual , bg_yellow , blue , fg , green , grey0 , grey1 , grey2 , none , orange , purple , red , statusline1 , statusline2 , statusline3 , yellow }
             hl.CurrentWord = { underline = true }
 
             hl.TelescopeBorder = { bg = palette.bg_dim, fg = palette.bg_dim }
@@ -53,6 +25,9 @@ return {
             hl.DiagnosticVirtualTextInfo = { fg = palette.blue, bg = palette.bg_blue }
             hl.DiagnosticVirtualTextWarn = { fg = palette.yellow, bg = palette.bg_yellow }
             hl.DiagnosticVirtualTextError = { fg = palette.red, bg = palette.bg_red }
+
+            hl.TreesitterContext = { bg = palette.bg, link = palette.none }
+            hl.TreesitterContextBottom = { underline = true, sp = palette.grey0 }
         end
     },
     init = function()

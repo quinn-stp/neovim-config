@@ -145,7 +145,6 @@ return {
 				completion = { completeopt = 'menu,menuone,noinsert' },
 				mapping = {
 					['<tab>'] = cmp.mapping.confirm(),
-                    ['<cr>'] = cmp.mapping.confirm()
 				},
 				snippet = {
 					expand = function(args)
@@ -177,6 +176,9 @@ return {
 						return vim_item
 					end
 				},
+                experimental = {
+                    ghost_text = true
+                }
 			}
 		end
 	},
