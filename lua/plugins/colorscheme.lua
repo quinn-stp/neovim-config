@@ -18,6 +18,7 @@ return {
 
             hl.DiffviewFilePanelTitle = { fg = palette.purple }
             hl.DiffviewFilePanelCounter = { fg = palette.blue }
+            hl.DiffviewFilePanelFileName = { fg = palette.fg }
             hl.DiffChange = { bg = palette.none }
             hl.DiffText = { bg = palette.bg_blue }
 
