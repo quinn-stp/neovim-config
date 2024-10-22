@@ -26,6 +26,8 @@ return {
 				vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { buffer = bufnr })
 				vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { buffer = bufnr })
 				vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { buffer = bufnr })
+				vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, { buffer = bufnr })
+				vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, { buffer = bufnr })
 
                 local signs = {
                     [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -48,7 +50,7 @@ return {
                         end
 					},
 					float = {
-						header = false,
+						header = nil,
 						border = 'solid',
 						focusable = true,
 					}
@@ -65,7 +67,7 @@ return {
 		dependencies = { 'williamboman/mason.nvim', 'VonHeikemen/lsp-zero.nvim' },
 		opts = function()
 			return {
-				ensure_installed = { 'clangd', 'lua_ls', 'jsonls', 'tsserver', 'svelte', 'rust_analyzer', 'cssls', 'jsonls' },
+				ensure_installed = { 'clangd', 'lua_ls', 'jsonls', 'svelte', 'rust_analyzer', 'cssls', 'jsonls', 'typst_lsp' },
 				handlers = {
 					require('lsp-zero').default_setup,
 					clangd = function()
@@ -93,11 +95,6 @@ return {
                         '-stdio',
                         '-analyzers',
                         vim.fn.expand('$MASON/share/sonarlint-analyzers/sonarcfamily.jar'),
-                    },
-                    settings = {
-                        sonarlint = {
-                            pathToCompileCommands = './build/compile_commands.json'
-                        }
                     }
                 },
                 filetypes = {

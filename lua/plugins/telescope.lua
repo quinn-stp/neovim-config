@@ -21,15 +21,27 @@ return {
 				}
 			}
 		end,
-		init = function()
+        keys = function()
 			local builtin = require('telescope.builtin')
-			vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-			vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-            vim.keymap.set('n', '<leader>fs', builtin.grep_string, {})
-		end
+            return {
+                { '<leader>ff', builtin.find_files },
+                { '<leader>fg', builtin.live_grep },
+                { '<leader>fs', builtin.grep_string }
+            }
+        end
 	},
 	{
 		'nvim-telescope/telescope-file-browser.nvim',
-		dependencies = { 'nvim-telescope/telescope.nvim' }
+		dependencies = { 'nvim-telescope/telescope.nvim' },
+        keys = function()
+            return {
+                {
+                    '<leader>fb',
+                    function()
+                        require('telescope').extensions.file_browser.file_browser({select_buffer = true})
+                    end
+                }
+            }
+        end
 	}
 }

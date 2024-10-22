@@ -23,4 +23,4 @@ return {
             { '<leader>ssl', require('smart-splits').swap_buf_right },
         }
     end
-}
+    }
